@@ -6,16 +6,20 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/21 11:35:06 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/22 16:02:02 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRC =	so_long.c\
+		gnl/get_next_line.c\
+		gnl/get_next_line_utils.c\
+
 NAME = so_long
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 MLX_FLAGS = -Lmlx -lmlx -lX11 -lXext -lm
 RM = rm -f
-SRC = so_long.c
+
 OBJ = $(SRC:.c=.o)
 INCLUDES = -I./libft -I./ft_printf
 LIBS = libft/libft.a ft_printf/libftprintf.a
