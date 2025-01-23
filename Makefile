@@ -6,11 +6,13 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/22 16:02:02 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/23 16:52:46 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
+		map.c\
+		cleanup.c\
 		gnl/get_next_line.c\
 		gnl/get_next_line_utils.c\
 
@@ -35,7 +37,7 @@ $(NAME):$(OBJ)
 	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -I/usr/include -Imlx_linux -O3 -c $< -o  $@
 
 clean:
 	$(RM) $(OBJ)

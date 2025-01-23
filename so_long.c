@@ -6,38 +6,12 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/23 10:28:09 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/23 18:10:11 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
-
-void	cleanup(t_data *data)
-{
-	// mlx_destroy_image(data->mlx_ptr, data->background);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-}
-// void	render_map(t_data *data)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = 0;
-// 	while (x < WINDOW_WIDTH)
-// 	{
-// 		y = 0;
-// 		while (y < WINDOW_HEIGHT)
-// 		{
-// 			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, 200);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 int	handle_keypress(int keycode, t_data *data)
 {
@@ -63,81 +37,139 @@ int	handle_close(t_data *data)
 	return (0);
 }
 
-void	read_map(char *arg, t_map *map)
+int	get_window_width(t_map *map)
 {
-	int		fd;
-	char	*map_path;
-	char	*line;
+	int	window_width;
 
-	map->height = 0;
-	map_path = ft_strjoin(MAP_FOLDER, arg);
-	if (!map_path)
-		return ;
-	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error opening file");
-		return ;
-	}
-	line = get_next_line(fd);
-	map->width = map->tile_size * (ft_strlen(line) - 1);
-	while (line)
-	{
-		ft_printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-		map->height++;
-	}
-	map->height = map->height * map->tile_size;
-	ft_printf("height: %d, width: %d\n", map->height, map->width);
-	free(map_path);
+	window_width = map->width * map->tile_size;
+	return (window_width);
 }
 
-void	get_window_size(t_map *map)
+int	get_window_height(t_map *map)
 {
-	(void)map;
-	// find width
-	return ;
+	int	window_height;
+
+	window_height = map->height * map->tile_size;
+	return (window_height);
+}
+
+void	load_textures(t_data *data)
+{
+	int	size;
+	int	window_width;
+	int	window_height;
+
+	window_width = get_window_width(data->map);
+	window_height = get_window_height(data->map);
+	size = data->map->tile_size;
+	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/wall.xpm",
+			&size, &size);
+	data->textures[1] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/bg.xpm",
+			&window_width, &window_height);
+	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/exit.xpm",
+			&size, &size);
+	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/player.xpm", &size, &size);
+	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/key.xpm",
+			&size, &size);
+}
+void	draw_wall(t_data *data, int y, int x, char c)
+{
+	if (c == '1')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[0],
+			x * data->map->tile_size, y * data->map->tile_size);
+	}
+}
+void	draw_bg(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[1], 0,
+		0);
+}
+void	draw_exit(t_data *data, int y, int x, char c)
+{
+	if (c == 'E')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[2],
+			x * data->map->tile_size, y * data->map->tile_size);
+	}
+}
+void	draw_player(t_data *data, int y, int x, char c)
+{
+	if (c == 'P')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
+			x * data->map->tile_size, y * data->map->tile_size);
+	}
+}
+void	draw_key(t_data *data, int y, int x, char c)
+{
+	if (c == 'C')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[4],
+			x * data->map->tile_size, y * data->map->tile_size);
+	}
+}
+void	draw_map(t_data *data)
+{
+	int		y;
+	int		x;
+	char	**grid;
+
+	grid = data->map->grid;
+	y = 0;
+	x = 0;
+	while (grid[y])
+	{
+		x = 0;
+		while (grid[y][x])
+		{
+			draw_wall(data, y, x, grid[y][x]);
+			draw_exit(data, y, x, grid[y][x]);
+			draw_player(data, y, x, grid[y][x]);
+			draw_key(data, y, x, grid[y][x]);
+			x++;
+		}
+		y++;
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 	t_map	*map;
 
-	// int		img_height;
-	// int		img_width;
 	if (argc < 2)
 		return (1);
 	map = malloc(sizeof(t_map));
-	map->tile_size = 32;
-	read_map(argv[1], map);
-	// img_width = 0;
-	// img_height = 0;
-	data.mlx_ptr = mlx_init();
-	if (!data.mlx_ptr)
+	if (!map)
 		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, map->width, map->height,
-			"so_long");
-	if (!data.win_ptr)
+	data = malloc(sizeof(t_data));
+	if (!data)
 	{
-		free(data.mlx_ptr);
+		free(map);
 		return (1);
 	}
-	// data.background = mlx_xpm_file_to_image(data.mlx_ptr,
-	// "./assets/Space.xpm",
-	// 		&img_width, &img_height);
-	// if (!data.background)
-	// {
-	// 	free(data.mlx_ptr);
-	// 	return (1);
-	// }
-	// mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.background, 0,
-	// 0);
-	// render_map(&data);
+	data->map = map;
+	map->tile_size = 32;
+	read_map(argv[1], map);
+	store_grid(argv[1], map);
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (1);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, get_window_width(map),
+			get_window_height(map), "so_long");
+	if (!data->win_ptr)
+	{
+		free(data->mlx_ptr);
+		return (1);
+	}
+	load_textures(data);
+	draw_bg(data);
+	draw_map(data);
+	mlx_hook(data->win_ptr, 2, 1L << 0, handle_keypress, data);
+	mlx_hook(data->win_ptr, 17, 0, handle_close, data);
+	mlx_loop(data->mlx_ptr);
 	free(map);
-	mlx_hook(data.win_ptr, 2, 1L << 0, handle_keypress, &data);
-	mlx_hook(data.win_ptr, 17, 0, handle_close, &data);
-	mlx_loop(data.mlx_ptr);
 	return (0);
 }
