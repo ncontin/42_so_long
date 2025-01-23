@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/22 17:38:50 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:27:31 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define SO_LONG_H
 
 # define MAP_FOLDER "maps/"
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
 # define ESC 65307
 # define W 119
 # define A 97
