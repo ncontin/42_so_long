@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/23 18:10:11 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/23 18:34:37 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,34 @@ int	handle_keypress(int keycode, t_data *data)
 	{
 		count++;
 		ft_printf("move count: %d\n", count);
+	}
+	if (keycode == W)
+	{
+		data->map->player_y -= 1;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
+			data->map->player_x * data->map->tile_size, (data->map->player_y)
+			* data->map->tile_size);
+	}
+	if (keycode == A)
+	{
+		data->map->player_x -= 1;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
+			data->map->player_x * data->map->tile_size, (data->map->player_y)
+			* data->map->tile_size);
+	}
+	if (keycode == S)
+	{
+		data->map->player_y += 1;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
+			data->map->player_x * data->map->tile_size, (data->map->player_y)
+			* data->map->tile_size);
+	}
+	if (keycode == D)
+	{
+		data->map->player_x += 1;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
+			data->map->player_x * data->map->tile_size, (data->map->player_y)
+			* data->map->tile_size);
 	}
 	if (keycode == ESC)
 	{
@@ -81,6 +109,8 @@ void	draw_wall(t_data *data, int y, int x, char c)
 			x * data->map->tile_size, y * data->map->tile_size);
 	}
 }
+
+// need fix
 void	draw_bg(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[1], 0,
@@ -92,6 +122,8 @@ void	draw_exit(t_data *data, int y, int x, char c)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[2],
 			x * data->map->tile_size, y * data->map->tile_size);
+		data->map->exit_x = x;
+		data->map->exit_y = y;
 	}
 }
 void	draw_player(t_data *data, int y, int x, char c)
@@ -100,6 +132,8 @@ void	draw_player(t_data *data, int y, int x, char c)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
 			x * data->map->tile_size, y * data->map->tile_size);
+		data->map->player_x = x;
+		data->map->player_y = y;
 	}
 }
 void	draw_key(t_data *data, int y, int x, char c)
@@ -110,6 +144,7 @@ void	draw_key(t_data *data, int y, int x, char c)
 			x * data->map->tile_size, y * data->map->tile_size);
 	}
 }
+
 void	draw_map(t_data *data)
 {
 	int		y;
@@ -165,7 +200,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	load_textures(data);
-	draw_bg(data);
 	draw_map(data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, handle_keypress, data);
 	mlx_hook(data->win_ptr, 17, 0, handle_close, data);
