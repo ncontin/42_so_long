@@ -6,13 +6,14 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/23 16:52:46 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/24 13:25:09 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
 		map.c\
 		cleanup.c\
+		player_move.c\
 		gnl/get_next_line.c\
 		gnl/get_next_line_utils.c\
 

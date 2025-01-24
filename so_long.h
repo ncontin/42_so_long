@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/23 16:54:44 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 13:24:43 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*textures[5];
+	int		move_count;
 	t_map	*map;
 }			t_data;
 
@@ -54,5 +55,9 @@ void		cleanup(t_data *data);
 void		free_grid(t_map *map);
 void		read_map(char *arg, t_map *map);
 void		store_grid(char *arg, t_map *map);
+void		move_player_left(int key, t_data *data);
+void		move_player_up(int key, t_data *data);
+void		move_player_right(int key, t_data *data);
+void		move_player_down(int key, t_data *data);
 
 #endif
