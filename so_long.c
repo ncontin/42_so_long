@@ -6,11 +6,39 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/24 13:33:05 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 17:12:47 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	collect_keys(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = data->map->player_x;
+	y = data->map->player_y;
+	if (data->map->grid[y][x] == 'C')
+		data->map->collectibles--;
+	if (data->map->collectibles == 0)
+		data->map->collected = 1;
+	ft_printf("%d\n", data->map->collected);
+}
+
+void	end_game(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = data->map->player_x;
+	y = data->map->player_y;
+	if (data->map->grid[y][x] == 'E' && data->map->collected == 1)
+	{
+		cleanup(data);
+		exit(0);
+	}
+}
 
 int	handle_keypress(int key, t_data *data)
 {
@@ -18,6 +46,8 @@ int	handle_keypress(int key, t_data *data)
 	move_player_up(key, data);
 	move_player_right(key, data);
 	move_player_down(key, data);
+	collect_keys(data);
+	end_game(data);
 	if (key == ESC)
 	{
 		cleanup(data);
@@ -49,100 +79,6 @@ int	get_window_height(t_map *map)
 	return (window_height);
 }
 
-void	load_textures(t_data *data)
-{
-	int	size;
-	int	window_width;
-	int	window_height;
-
-	window_width = get_window_width(data->map);
-	window_height = get_window_height(data->map);
-	size = data->map->tile_size;
-	data->textures[0] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/bg.xpm",
-			&window_width, &window_height);
-	data->textures[1] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/wall.xpm",
-			&size, &size);
-	data->textures[2] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/exit.xpm",
-			&size, &size);
-	data->textures[3] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"assets/player.xpm", &size, &size);
-	data->textures[4] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/key.xpm",
-			&size, &size);
-}
-void	draw_wall(t_data *data, int y, int x, char c)
-{
-	if (c == '1')
-	{
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[1],
-			x * data->map->tile_size, y * data->map->tile_size);
-	}
-}
-
-// need fix
-void	draw_bg(t_data *data, int y, int x, char c)
-{
-	if (c == '0')
-	{
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[0],
-			x * data->map->tile_size, y * data->map->tile_size);
-	}
-}
-void	draw_exit(t_data *data, int y, int x, char c)
-{
-	if (c == 'E')
-	{
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[2],
-			x * data->map->tile_size, y * data->map->tile_size);
-		data->map->exit_x = x;
-		data->map->exit_y = y;
-	}
-}
-void	draw_player(t_data *data, int y, int x, char c)
-{
-	if (c == 'P')
-	{
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
-			x * data->map->tile_size, y * data->map->tile_size);
-		data->map->player_x = x;
-		data->map->player_y = y;
-	}
-}
-void	draw_key(t_data *data, int y, int x, char c)
-{
-	if (c == 'C')
-	{
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[4],
-			x * data->map->tile_size, y * data->map->tile_size);
-	}
-}
-
-void	draw_map(t_data *data)
-{
-	int		y;
-	int		x;
-	char	**grid;
-
-	grid = data->map->grid;
-	y = 0;
-	x = 0;
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	while (grid[y])
-	{
-		x = 0;
-		while (grid[y][x])
-		{
-			draw_bg(data, y, x, grid[y][x]);
-			draw_wall(data, y, x, grid[y][x]);
-			draw_exit(data, y, x, grid[y][x]);
-			draw_player(data, y, x, grid[y][x]);
-			draw_key(data, y, x, grid[y][x]);
-			x++;
-		}
-		y++;
-	}
-	// mlx_do_sync(data->mlx_ptr);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -162,8 +98,10 @@ int	main(int argc, char **argv)
 	data->move_count = 0;
 	data->map = map;
 	map->tile_size = 32;
-	read_map(argv[1], map);
-	store_grid(argv[1], map);
+	data->map->collectibles = 0;
+	data->map->collected = 0;
+	read_map(argv[1], data);
+	store_grid(argv[1], data);
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (1);
@@ -179,6 +117,6 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win_ptr, 2, 1L << 0, handle_keypress, data);
 	mlx_hook(data->win_ptr, 17, 0, handle_close, data);
 	mlx_loop(data->mlx_ptr);
-	free(map);
+	// free(map);
 	return (0);
 }

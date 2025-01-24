@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/24 13:24:43 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 16:43:58 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # define A 97
 # define S 115
 # define D 100
+
+# define BG 0
+# define WALL 1
+# define EXIT 2
+# define PLAYER 3
+# define KEY 4
 
 typedef struct s_map
 {
@@ -53,11 +59,20 @@ typedef struct s_data
 
 void		cleanup(t_data *data);
 void		free_grid(t_map *map);
-void		read_map(char *arg, t_map *map);
-void		store_grid(char *arg, t_map *map);
+void		read_map(char *arg, t_data *data);
+void		store_grid(char *arg, t_data *data);
 void		move_player_left(int key, t_data *data);
 void		move_player_up(int key, t_data *data);
 void		move_player_right(int key, t_data *data);
 void		move_player_down(int key, t_data *data);
+void		load_textures(t_data *data);
+void		draw_wall(t_data *data, int y, int x, char c);
+void		draw_bg(t_data *data, int y, int x, char c);
+void		draw_exit(t_data *data, int y, int x, char c);
+void		draw_player(t_data *data, int y, int x, char c);
+void		draw_key(t_data *data, int y, int x, char c);
+void		draw_map(t_data *data);
+int			get_window_height(t_map *map);
+int			get_window_width(t_map *map);
 
 #endif

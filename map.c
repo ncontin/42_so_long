@@ -6,19 +6,19 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:45:51 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/23 16:54:14 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 16:15:39 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	read_map(char *arg, t_map *map)
+void	read_map(char *arg, t_data *data)
 {
 	int		fd;
 	char	*map_path;
 	char	*line;
 
-	map->height = 0;
+	data->map->height = 0;
 	map_path = ft_strjoin(MAP_FOLDER, arg);
 	if (!map_path)
 		return ;
@@ -26,22 +26,24 @@ void	read_map(char *arg, t_map *map)
 	if (fd < 0)
 	{
 		perror("Error opening file");
+		free(data->map);
+		free(data);
 		free(map_path);
-		return ;
+		exit(1);
 	}
 	line = get_next_line(fd);
-	map->width = ft_strlen(line) - 1;
+	data->map->width = ft_strlen(line) - 1;
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
-		map->height++;
+		data->map->height++;
 	}
 	close(fd);
 	free(map_path);
 }
 
-void	store_grid(char *arg, t_map *map)
+void	store_grid(char *arg, t_data *data)
 {
 	char	*map_path;
 	int		i;
@@ -58,12 +60,12 @@ void	store_grid(char *arg, t_map *map)
 		free(map_path);
 		return ;
 	}
-	map->grid = malloc(sizeof(char *) * (map->height + 1));
-	if (!map->grid)
+	data->map->grid = malloc(sizeof(char *) * (data->map->height + 1));
+	if (!data->map->grid)
 		return ;
-	map->grid[i] = get_next_line(fd);
-	while (map->grid[i++])
-		map->grid[i] = get_next_line(fd);
+	data->map->grid[i] = get_next_line(fd);
+	while (data->map->grid[i++])
+		data->map->grid[i] = get_next_line(fd);
 	close(fd);
 	free(map_path);
 }
