@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/24 17:12:47 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 17:15:48 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	collect_keys(t_data *data)
 	x = data->map->player_x;
 	y = data->map->player_y;
 	if (data->map->grid[y][x] == 'C')
+	{
 		data->map->collectibles--;
+		data->map->grid[y][x] = '0';
+	}
 	if (data->map->collectibles == 0)
 		data->map->collected = 1;
 	ft_printf("%d\n", data->map->collected);
