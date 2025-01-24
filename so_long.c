@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/24 13:29:19 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/24 13:33:05 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ void	draw_wall(t_data *data, int y, int x, char c)
 }
 
 // need fix
-void	draw_bg(t_data *data)
+void	draw_bg(t_data *data, int y, int x, char c)
 {
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[0], 0,
-		0);
+	if (c == '0')
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[0],
+			x * data->map->tile_size, y * data->map->tile_size);
+	}
 }
 void	draw_exit(t_data *data, int y, int x, char c)
 {
@@ -122,13 +125,13 @@ void	draw_map(t_data *data)
 	grid = data->map->grid;
 	y = 0;
 	x = 0;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	draw_bg(data);
+	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	while (grid[y])
 	{
 		x = 0;
 		while (grid[y][x])
 		{
+			draw_bg(data, y, x, grid[y][x]);
 			draw_wall(data, y, x, grid[y][x]);
 			draw_exit(data, y, x, grid[y][x]);
 			draw_player(data, y, x, grid[y][x]);
@@ -137,7 +140,7 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
-	mlx_do_sync(data->mlx_ptr);
+	// mlx_do_sync(data->mlx_ptr);
 }
 
 int	main(int argc, char **argv)
