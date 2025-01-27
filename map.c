@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:45:51 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/27 12:39:05 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:48:19 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,30 +115,10 @@ void	check_map_shape(t_data *data)
 		exit(1);
 	}
 }
-// void	check_top_wall(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (data->map->grid[0][j])
-// 	{
-// 		if (data->map->grid[0][j] != '1')
-// 		{
-// 			free_map(data);
-// 			ft_putstr_fd("The map must be closed/surrounded by walls.\n", 2);
-// 			exit(1);
-// 		}
-// 		j++;
-// 	}
-// }
-void	check_map_walls(t_data *data)
+void	check_top_wall(t_data *data)
 {
-	int	i;
 	int	j;
 
-	i = 0;
 	j = 0;
 	while (data->map->grid[0][j])
 	{
@@ -150,6 +130,12 @@ void	check_map_walls(t_data *data)
 		}
 		j++;
 	}
+}
+void	check_bot_wall(t_data *data)
+{
+	int	j;
+
+	j = 0;
 	while (data->map->grid[data->map->height][j])
 	{
 		if (data->map->grid[0][j] != '1')
@@ -160,6 +146,12 @@ void	check_map_walls(t_data *data)
 		}
 		j++;
 	}
+}
+void	check_left_wall(t_data *data)
+{
+	int	i;
+
+	i = 0;
 	while (data->map->grid[i][0])
 	{
 		if (data->map->grid[i][0] != '1')
@@ -170,6 +162,12 @@ void	check_map_walls(t_data *data)
 		}
 		i++;
 	}
+}
+void	check_right_wall(t_data *data)
+{
+	int	i;
+
+	i = 0;
 	while (data->map->grid[i][data->map->width])
 	{
 		if (data->map->grid[i][data->map->width] != '1')
@@ -177,6 +175,32 @@ void	check_map_walls(t_data *data)
 			free_map(data);
 			ft_putstr_fd("The map must be closed/surrounded by walls.\n", 2);
 			exit(1);
+		}
+		i++;
+	}
+}
+
+void	check_map_walls(t_data *data)
+{
+	check_top_wall(data);
+	check_bot_wall(data);
+	check_left_wall(data);
+	check_right_wall(data);
+}
+
+void	check_map_path(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map->grid[i][j])
+	{
+		j = 0;
+		while (data->map->grid[i][j])
+		{
+			
+			j++;
 		}
 		i++;
 	}
