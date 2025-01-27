@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:32 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/23 16:44:19 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:17:14 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,11 @@ void	free_grid(t_map *map)
 		i++;
 	}
 	free(map->grid);
+}
+
+void	free_map(t_data *data)
+{
+	free_grid(data->map);
+	free(data->map);
+	free(data);
 }
