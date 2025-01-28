@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:45:51 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/27 18:24:23 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:56:48 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void	check_map_walls(t_data *data)
 	check_right_wall(data);
 }
 
-void	find_player_pos(t_map *map)
+void	find_elements(t_map *map)
 {
 	int	y;
 	int	x;
@@ -211,8 +211,14 @@ void	find_player_pos(t_map *map)
 			{
 				map->player_x = x;
 				map->player_y = y;
-				return ;
 			}
+			else if (map->grid[y][x] == 'E')
+			{
+				map->exit_x = x;
+				map->exit_y = y;
+			}
+			else if (map->grid[y][x] == 'C')
+				map->collectibles++;
 			x++;
 		}
 		y++;
@@ -221,13 +227,11 @@ void	find_player_pos(t_map *map)
 
 void	flood_fill(t_map *map, int player_x, int player_y)
 {
-	// if (player_x < 0 || player_y < 0 || player_y >= map->height
-	// 	|| player_x >= map->width)
-	// 	return ;
 	if (map->grid[player_y][player_x] == '1'
 		|| map->grid[player_y][player_x] == 'V')
 		return ;
-	ft_printf("Filling position [%d][%d] with V\n", player_x, player_y);
+	if (map->grid[player_y][player_x] == 'C')
+		map->collectibles--;
 	map->grid[player_y][player_x] = 'V';
 	flood_fill(map, player_x + 1, player_y);
 	flood_fill(map, player_x - 1, player_y);
@@ -240,8 +244,6 @@ void	copy_map(t_map *map_copy, t_data *data)
 	int	i;
 
 	i = 0;
-	// int		collectibles_found;
-	// int		exit_found;
 	map_copy->grid = malloc(sizeof(char *) * (data->map->height + 1));
 	if (!map_copy->grid)
 		return ;
@@ -251,18 +253,33 @@ void	copy_map(t_map *map_copy, t_data *data)
 		i++;
 	}
 	map_copy->grid[i] = NULL;
+	map_copy->collectibles = 0;
+	map_copy->collected = 0;
 }
+
 void	check_map_path(t_data *data)
 {
 	t_map	*map_copy;
 	int		i;
+	int		exit_found;
 
+	exit_found = 0;
 	map_copy = malloc(sizeof(t_map));
 	if (!map_copy)
 		return ;
 	copy_map(map_copy, data);
-	find_player_pos(map_copy);
+	find_elements(map_copy);
 	flood_fill(map_copy, map_copy->player_x, map_copy->player_y);
+	if (map_copy->grid[map_copy->exit_y][map_copy->exit_x] == 'V')
+		exit_found = 1;
+	if (map_copy->collectibles == 0)
+		map_copy->collected = 1;
+	if (exit_found != 1 || map_copy->collected != 1)
+	{
+		ft_putstr_fd("Error\nIvalid path in the map\n", 2);
+		free_map(data);
+		exit(1);
+	}
 	i = 0;
 	while (map_copy->grid[i])
 	{
