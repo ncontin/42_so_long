@@ -6,12 +6,18 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/27 16:35:52 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/28 12:01:34 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
-		map.c\
+		parse_map/check_path.c\
+		parse_map/check_shape.c\
+		parse_map/check_walls.c\
+		parse_map/components.c\
+		parse_map/read_map.c\
+		parse_map/store_grid.c\
+		parse_map/validate_map.c\
 		draw.c\
 		cleanup.c\
 		player_move.c\

@@ -6,12 +6,13 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:32 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 09:16:00 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:01:31 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+// to use after loading textures
 void	cleanup(t_data *data)
 {
 	int	i;
@@ -41,9 +42,13 @@ void	free_grid(t_map *map)
 	free(map->grid);
 }
 
-void	free_map(t_data *data)
+void	free_map(t_map *map)
 {
-	free_grid(data->map);
-	free(data->map);
+	free_grid(map);
+	free(map);
+}
+void	free_data(t_data *data)
+{
+	free_map(data->map);
 	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 09:16:12 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:57:50 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ void		draw_map(t_data *data);
 int			get_window_height(t_map *map);
 int			get_window_width(t_map *map);
 void		validate_map(t_data *data);
-void		free_map(t_data *data);
+void		free_data(t_data *data);
+void		free_map(t_map *map);
+void		check_map_components(t_data *data);
+void		find_components(t_map *map);
+void		check_map_path(t_data *data);
+void		check_map_shape(t_data *data);
+void		check_map_walls(t_data *data);
+void		read_map(char *arg, t_data *data);
 
 #endif
