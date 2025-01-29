@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 12:48:55 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:42:49 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define MAP_FOLDER ""
+# define MAP_FOLDER "maps/"
 # define ESC 65307
 # define W 119
 # define A 97

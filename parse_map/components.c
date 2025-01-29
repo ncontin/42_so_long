@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 18:16:06 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 17:04:42 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ static void	find_component(t_map *map, int y, int x, char component)
 			map->exit_y = y;
 		}
 		else if (component == 'C')
-		{
 			map->collectibles++;
-		}
 	}
 }
 

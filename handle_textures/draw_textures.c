@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:18:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:56:47 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 17:12:19 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static void	draw_wall_bg_exit(t_data *data, int y, int x, char c)
 {
+	if (!data || !data->mlx_ptr || !data->win_ptr)
+		return ;
+	if (!data->textures[0] || !data->textures[1] || !data->textures[2]
+		|| !data->textures[3] || !data->textures[4])
+	{
+		ft_putstr_fd("Error\nOne or more textures failed to load\n", 2);
+		return ;
+	}
 	if (c == '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[1],
@@ -35,6 +43,14 @@ static void	draw_wall_bg_exit(t_data *data, int y, int x, char c)
 
 static void	draw_player_key(t_data *data, int y, int x, char c)
 {
+	if (!data || !data->mlx_ptr || !data->win_ptr)
+		return ;
+	if (!data->textures[0] || !data->textures[1] || !data->textures[2]
+		|| !data->textures[3] || !data->textures[4])
+	{
+		ft_putstr_fd("Error\nOne or more textures failed to load\n", 2);
+		return ;
+	}
 	if (c == 'P')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
@@ -56,6 +72,14 @@ void	draw_map(t_data *data)
 	int		x;
 	char	**grid;
 
+	if (!data || !data->mlx_ptr || !data->win_ptr)
+		return ;
+	if (!data->textures[0] || !data->textures[1] || !data->textures[2]
+		|| !data->textures[3] || !data->textures[4])
+	{
+		ft_putstr_fd("Error\nOne or more textures failed to load\n", 2);
+		return ;
+	}
 	grid = data->map->grid;
 	y = 0;
 	x = 0;

@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:16:33 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 12:48:38 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 17:09:01 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ void	read_map(char *arg, t_data *data)
 	int		fd;
 	char	*map_path;
 	char	*line;
+	int		ext;
 
 	data->map->height = 0;
 	map_path = ft_strjoin(MAP_FOLDER, arg);
+	ext = ft_strlen(map_path);
+	if (ft_strncmp(map_path + (ext - 4), ".ber", 4) != 0)
+		handle_open_error(data, map_path);
 	if (!map_path)
 		return ;
 	fd = open(map_path, O_RDONLY);
@@ -40,6 +44,8 @@ void	read_map(char *arg, t_data *data)
 	while (line)
 	{
 		free(line);
+		// if (data->map->width != ft_strlen(line) - 1)
+		// 	handle_open_error(data, map_path);
 		line = get_next_line(fd);
 		data->map->height++;
 	}
