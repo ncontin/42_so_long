@@ -6,22 +6,22 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 11:57:50 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:48:55 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "ft_printf/ft_printf.h"
-#include "gnl/get_next_line.h"
-#include "libft/libft.h"
-#include "mlx/mlx.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define MAP_FOLDER "maps/"
+# include "libs/ft_printf/ft_printf.h"
+# include "libs/gnl/get_next_line.h"
+# include "libs/libft/libft.h"
+# include "libs/mlx/mlx.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+# define MAP_FOLDER ""
 # define ESC 65307
 # define W 119
 # define A 97
@@ -66,11 +66,6 @@ void		move_player_up(int key, t_data *data);
 void		move_player_right(int key, t_data *data);
 void		move_player_down(int key, t_data *data);
 void		load_textures(t_data *data);
-void		draw_wall(t_data *data, int y, int x, char c);
-void		draw_bg(t_data *data, int y, int x, char c);
-void		draw_exit(t_data *data, int y, int x, char c);
-void		draw_player(t_data *data, int y, int x, char c);
-void		draw_key(t_data *data, int y, int x, char c);
 void		draw_map(t_data *data);
 int			get_window_height(t_map *map);
 int			get_window_width(t_map *map);
@@ -83,5 +78,9 @@ void		check_map_path(t_data *data);
 void		check_map_shape(t_data *data);
 void		check_map_walls(t_data *data);
 void		read_map(char *arg, t_data *data);
+void		load_textures(t_data *data);
+void		open_window(t_data *data);
+void		collect_keys(t_data *data);
+void		end_game(t_data *data);
 
 #endif

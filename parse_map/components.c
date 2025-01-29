@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 12:39:53 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/28 18:16:06 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,18 @@ void	find_components(t_map *map)
 		y++;
 	}
 }
+
 void	check_result(t_data *data, int door, int collectible, int player)
 {
 	if (door != 1 || collectible < 1 || player != 1)
 	{
 		free_data(data);
-		ft_putstr_fd("Error\nThe map is invalid\n", 2);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("The map is invalid\n", 2);
 		exit(1);
 	}
 }
+
 void	check_map_components(t_data *data)
 {
 	int	y;
@@ -72,8 +75,8 @@ void	check_map_components(t_data *data)
 	door = 0;
 	collectible = 0;
 	player = 0;
-	y = 0;
-	while (data->map->grid[y])
+	y = -1;
+	while (data->map->grid[++y])
 	{
 		x = 0;
 		while (data->map->grid[y][x])
@@ -86,7 +89,6 @@ void	check_map_components(t_data *data)
 				player += 1;
 			x++;
 		}
-		y++;
 	}
 	check_result(data, door, collectible, player);
 }

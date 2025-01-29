@@ -6,11 +6,12 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/28 12:01:34 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/29 12:33:45 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
+		open_window.c\
 		parse_map/check_path.c\
 		parse_map/check_shape.c\
 		parse_map/check_walls.c\
@@ -18,44 +19,44 @@ SRC =	so_long.c\
 		parse_map/read_map.c\
 		parse_map/store_grid.c\
 		parse_map/validate_map.c\
-		draw.c\
+		handle_textures/draw_textures.c\
+		handle_textures/load_textures.c\
 		cleanup.c\
-		player_move.c\
-		gnl/get_next_line.c\
-		gnl/get_next_line_utils.c\
+		game_logic/collect_keys.c\
+		game_logic/end_game.c\
+		game_logic/player_move.c\
+		libs/gnl/get_next_line.c\
+		libs/gnl/get_next_line_utils.c\
 
 NAME = so_long
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-MLX_FLAGS = -Lmlx -lmlx -lX11 -lXext -lm
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+MLX_FLAGS = -Llibs/mlx -lmlx -lX11 -lXext -lm
 RM = rm -f
 
 OBJ = $(SRC:.c=.o)
-INCLUDES = -I./libft -I./ft_printf
-LIBS = libft/libft.a ft_printf/libftprintf.a
+INCLUDES = -I./libs/libft -I./libs/ft_printf -I./libs/gnl -I./libs/mlx
+LIBS = libs/libft/libft.a libs/ft_printf/libftprintf.a
 
 all: $(NAME)
 
-mlx:
-	make -C mlx
-
 $(NAME):$(OBJ)
-	make all -C libft
-	make all -C ft_printf
+	make all -C libs/libft
+	make all -C libs/ft_printf
 	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -I/usr/include -Imlx_linux -O3 -c $< -o  $@
+	$(CC) $(CFLAGS) $(INCLUDES) -Imlx_linux -O3 -c $< -o  $@
 
 clean:
 	$(RM) $(OBJ)
-	make clean -C libft
-	make clean -C ft_printf
+	make clean -C libs/libft
+	make clean -C libs/ft_printf
 
 fclean: clean
 	$(RM) $(NAME)
-	make fclean -C libft
-	make fclean -C ft_printf
+	make fclean -C libs/libft
+	make fclean -C libs/ft_printf
 
 re: fclean all
 

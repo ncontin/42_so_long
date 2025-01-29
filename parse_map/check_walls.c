@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:51:29 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 11:56:32 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:55:00 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ static void	check_top_wall(t_data *data)
 		if (data->map->grid[0][j] != '1')
 		{
 			free_data(data);
-			ft_putstr_fd("Error\nThe top wall must be closed/surrounded by walls\n",
-				2);
+			ft_putstr_fd("Error\n", 2);
+			ft_putstr_fd("The map must be closed by walls\n", 2);
 			exit(1);
 		}
 		j++;
 	}
 }
+
 static void	check_bot_wall(t_data *data)
 {
 	int	j;
@@ -39,8 +40,8 @@ static void	check_bot_wall(t_data *data)
 		if (data->map->grid[data->map->height - 1][j] != '1')
 		{
 			free_data(data);
-			ft_putstr_fd("Error\nThe bottom wall must be closed/surrounded by walls\n",
-				2);
+			ft_putstr_fd("Error\n", 2);
+			ft_putstr_fd("The map must be closed by walls\n", 2);
 			exit(1);
 		}
 		j++;
@@ -58,8 +59,8 @@ static void	check_left_wall(t_data *data)
 		if (data->map->grid[i][0] != '1')
 		{
 			free_data(data);
-			ft_putstr_fd("Error\nThe left wall must be closed/surrounded by walls\n",
-				2);
+			ft_putstr_fd("Error\n", 2);
+			ft_putstr_fd("The map must be closed by walls\n", 2);
 			exit(1);
 		}
 		i++;
@@ -76,8 +77,8 @@ static void	check_right_wall(t_data *data)
 		if (data->map->grid[i][data->map->width - 1] != '1')
 		{
 			free_data(data);
-			ft_putstr_fd("Error\nThe right must be closed/surrounded by walls\n",
-				2);
+			ft_putstr_fd("Error\n", 2);
+			ft_putstr_fd("The map must be closed by walls\n", 2);
 			exit(1);
 		}
 		i++;

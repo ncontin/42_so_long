@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:17:38 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 11:17:52 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:48:44 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	store_grid(char *arg, t_data *data)
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error\nError opening file\n", 2);
+		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Error opening file\n", 2);
 		free(data->map);
 		free(data);
 		return ;

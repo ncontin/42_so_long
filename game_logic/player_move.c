@@ -6,11 +6,11 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:23:34 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/24 17:09:49 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/29 11:56:11 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	move_player_left(int key, t_data *data)
 {
@@ -32,10 +32,11 @@ void	move_player_left(int key, t_data *data)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->textures[PLAYER], (x - 1) * size, y * size);
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->textures[BG], (x)*size, y * size);
+				data->textures[BG], x * size, y * size);
 		}
 	}
 }
+
 void	move_player_up(int key, t_data *data)
 {
 	int	x;
@@ -56,10 +57,11 @@ void	move_player_up(int key, t_data *data)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->textures[PLAYER], x * size, (y - 1) * size);
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->textures[BG], (x)*size, y * size);
+				data->textures[BG], x * size, y * size);
 		}
 	}
 }
+
 void	move_player_right(int key, t_data *data)
 {
 	int	x;
@@ -80,10 +82,11 @@ void	move_player_right(int key, t_data *data)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->textures[PLAYER], (x + 1) * size, y * size);
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->textures[BG], (x)*size, y * size);
+				data->textures[BG], x * size, y * size);
 		}
 	}
 }
+
 void	move_player_down(int key, t_data *data)
 {
 	int	x;
@@ -104,9 +107,7 @@ void	move_player_down(int key, t_data *data)
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 				data->textures[PLAYER], x * size, (y + 1) * size);
 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-				data->textures[BG], (x)*size, y * size);
+				data->textures[BG], x * size, y * size);
 		}
 	}
 }
-
-
