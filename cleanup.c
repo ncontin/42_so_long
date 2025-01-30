@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:43:32 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:25:12 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:36:36 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	cleanup(t_data *data)
 
 	i = 0;
 	while (i < 5)
-		mlx_destroy_image(data->mlx_ptr, data->textures[i++]);
+	{
+		if (data->textures[i])
+			mlx_destroy_image(data->mlx_ptr, data->textures[i]);
+		i++;
+	}
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);

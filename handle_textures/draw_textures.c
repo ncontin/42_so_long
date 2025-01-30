@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:18:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 18:30:35 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/30 10:44:52 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	handle_error(t_data *data)
 }
 static void	draw_wall_bg_exit(t_data *data, int y, int x, char c)
 {
+	handle_error(data);
 	if (c == '1')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[1],
@@ -46,6 +47,7 @@ static void	draw_wall_bg_exit(t_data *data, int y, int x, char c)
 
 static void	draw_player_key(t_data *data, int y, int x, char c)
 {
+	handle_error(data);
 	if (c == 'P')
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->textures[3],
@@ -76,7 +78,6 @@ void	draw_map(t_data *data)
 		{
 			draw_wall_bg_exit(data, y, x, grid[y][x]);
 			draw_player_key(data, y, x, grid[y][x]);
-			handle_error(data);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:40 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:51 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:37:22 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ void	load_textures(t_data *data)
 			"assets/player.xpm", &size, &size);
 	data->textures[KEY] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/key.xpm",
 			&size, &size);
+	if (!data->textures[BG] || !data->textures[WALL] || !data->textures[EXIT]
+		|| !data->textures[PLAYER] || !data->textures[KEY])
+	{
+		cleanup(data);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Unable to load textures\n", 2);
+		exit(1);
+	}
 }
