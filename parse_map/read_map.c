@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:16:33 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 17:09:01 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/30 17:09:11 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,26 @@ void	read_map(char *arg, t_data *data)
 	if (fd < 0)
 		handle_open_error(data, map_path);
 	line = get_next_line(fd);
-	data->map->width = ft_strlen(line) - 1;
+	data->map->width = (int)ft_strlen(line) - 1;
 	while (line)
 	{
+		// if (line[ft_strlen(line) - 1] == '\n')
+		// {
+		// 	if (data->map->width != ((int)ft_strlen(line) - 1))
+		// 	{
+		// 		ft_putstr_fd("shape error\n", 2);
+		// 		ft_printf("width: %d", data->map->width);
+		// 		// handle_open_error(data, map_path);
+		// 	}
+		// }
+		// else if (data->map->width != ((int)ft_strlen(line)))
+		// {
+		// 	ft_putstr_fd("this should be the last line\n", 1);
+		// 	ft_putstr_fd("shape error\n", 2);
+		// 	ft_printf("width: %d", data->map->width);
+		// 	// handle_open_error(data, map_path);
+		// }
 		free(line);
-		// if (data->map->width != ft_strlen(line) - 1)
-		// 	handle_open_error(data, map_path);
 		line = get_next_line(fd);
 		data->map->height++;
 	}
