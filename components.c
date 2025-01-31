@@ -6,13 +6,13 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/31 16:09:10 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:15:20 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	find_component(t_map *map, int y, int x, char component)
+static void	get_component_pos(t_map *map, int y, int x, char component)
 {
 	if (map->grid[y][x] == component)
 	{
@@ -42,9 +42,9 @@ void	find_components(t_map *map)
 		x = 0;
 		while (map->grid[y][x])
 		{
-			find_component(map, y, x, 'P');
-			find_component(map, y, x, 'E');
-			find_component(map, y, x, 'C');
+			get_component_pos(map, y, x, 'P');
+			get_component_pos(map, y, x, 'E');
+			get_component_pos(map, y, x, 'C');
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/31 11:13:46 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:22:26 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_data(t_data *data)
 	if (!map)
 	{
 		free(data);
-		return ;
+		exit(1);
 	}
 	data->move_count = 0;
 	data->map = map;
@@ -77,5 +77,4 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win_ptr, 2, 1L << 0, handle_keypress, data);
 	mlx_hook(data->win_ptr, 17, 0, handle_close, data);
 	mlx_loop(data->mlx_ptr);
-	return (0);
 }
