@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/30 11:56:23 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 12:05:04 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_data
 
 void		cleanup(t_data *data);
 void		free_grid(t_map *map);
-void		read_map(char *arg, t_data *data);
+void		read_map(char *arg, t_data *data, int fd);
 void		store_grid(char *arg, t_data *data);
 void		move_player_left(int key, t_data *data);
 void		move_player_up(int key, t_data *data);
@@ -75,9 +75,8 @@ void		free_map(t_map *map);
 void		check_map_components(t_data *data);
 void		find_components(t_map *map);
 void		check_map_path(t_data *data);
-void		check_map_shape(t_data *data);
+void		check_map_shape(t_data *data, char *line, char *map_path);
 void		check_map_walls(t_data *data);
-void		read_map(char *arg, t_data *data);
 void		load_textures(t_data *data);
 void		open_window(t_data *data);
 void		collect_keys(t_data *data);

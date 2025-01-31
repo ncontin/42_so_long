@@ -6,22 +6,22 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/30 16:01:26 by ncontin          ###   ########.fr        #
+#    Updated: 2025/01/31 16:12:35 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
 		open_window.c\
+		components.c\
+		cleanup.c\
 		parse_map/check_path.c\
 		parse_map/check_shape.c\
 		parse_map/check_walls.c\
-		parse_map/components.c\
 		parse_map/read_map.c\
 		parse_map/store_grid.c\
 		parse_map/validate_map.c\
 		handle_textures/draw_textures.c\
 		handle_textures/load_textures.c\
-		cleanup.c\
 		game_logic/collect_keys.c\
 		game_logic/end_game.c\
 		game_logic/player_move.c\
@@ -43,6 +43,7 @@ all: $(NAME)
 $(NAME):$(OBJ)
 	make all -C libs/libft
 	make all -C libs/ft_printf
+	make -C libs/mlx
 	$(CC) $(OBJ) $(MLX_FLAGS) $(LIBS) -o $(NAME)
 
 %.o: %.c
@@ -52,6 +53,7 @@ clean:
 	$(RM) $(OBJ)
 	make clean -C libs/libft
 	make clean -C libs/ft_printf
+	make clean -C libs/mlx
 
 fclean: clean
 	$(RM) $(NAME)

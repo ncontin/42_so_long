@@ -6,11 +6,11 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 17:04:42 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:09:10 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 static void	find_component(t_map *map, int y, int x, char component)
 {

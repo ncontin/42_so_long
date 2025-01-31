@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:40:42 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 11:13:46 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (1);
 	init_data(data);
-	read_map(argv[1], data);
+	read_map(argv[1], data, 0);
 	store_grid(argv[1], data);
 	validate_map(data);
 	open_window(data);

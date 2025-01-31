@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:29:53 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:30:47 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:51:57 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ void	open_window(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
-		return ;
+	{
+		free_data(data);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("MLX initialization failed\n", 2);
+		exit(1);
+	}
 	data->win_ptr = mlx_new_window(data->mlx_ptr, get_window_width(data->map),
 			get_window_height(data->map), "so_long");
 	if (!data->win_ptr)
 	{
 		free(data->mlx_ptr);
-		return ;
+		free_data(data);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("MLX new window failed\n", 2);
+		exit(1);
 	}
 }

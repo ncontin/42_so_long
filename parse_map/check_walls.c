@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:51:29 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 12:55:00 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/01/31 12:21:03 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	check_top_wall(t_data *data)
 		{
 			free_data(data);
 			ft_putstr_fd("Error\n", 2);
-			ft_putstr_fd("The map must be closed by walls\n", 2);
+			ft_putstr_fd("The top wall must be closed\n", 2);
 			exit(1);
 		}
 		j++;
@@ -35,18 +35,18 @@ static void	check_bot_wall(t_data *data)
 	int	j;
 
 	j = 0;
-	while (data->map->grid[data->map->height - 1][j] != '\n')
+	while (data->map->grid[data->map->height - 1][j] != '\n'
+		&& data->map->grid[data->map->height - 1][j] != '\0')
 	{
 		if (data->map->grid[data->map->height - 1][j] != '1')
 		{
 			free_data(data);
 			ft_putstr_fd("Error\n", 2);
-			ft_putstr_fd("The map must be closed by walls\n", 2);
+			ft_putstr_fd("The bottom wall must be closed\n", 2);
 			exit(1);
 		}
 		j++;
 	}
-	return ;
 }
 
 static void	check_left_wall(t_data *data)
@@ -60,7 +60,7 @@ static void	check_left_wall(t_data *data)
 		{
 			free_data(data);
 			ft_putstr_fd("Error\n", 2);
-			ft_putstr_fd("The map must be closed by walls\n", 2);
+			ft_putstr_fd("The left wall must be closed\n", 2);
 			exit(1);
 		}
 		i++;
@@ -78,7 +78,7 @@ static void	check_right_wall(t_data *data)
 		{
 			free_data(data);
 			ft_putstr_fd("Error\n", 2);
-			ft_putstr_fd("The map must be closed by walls\n", 2);
+			ft_putstr_fd("The right wall must be closed\n", 2);
 			exit(1);
 		}
 		i++;
