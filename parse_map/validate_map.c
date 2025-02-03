@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:53:48 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:45 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:13:11 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	validate_map(t_data *data)
 {
-	check_map_shape_new(data);
+	check_map_shape(data);
 	check_map_components(data);
 	check_map_walls(data);
 	check_map_path(data);
