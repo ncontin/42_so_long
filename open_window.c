@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:29:53 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/31 15:51:57 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/03 11:51:31 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	open_window(t_data *data)
 			get_window_height(data->map), "so_long");
 	if (!data->win_ptr)
 	{
+		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 		free_data(data);
 		ft_putstr_fd("Error\n", 2);
