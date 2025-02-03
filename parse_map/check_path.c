@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:51:56 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/29 11:42:20 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:33:40 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	check_map_path(t_data *data)
 	if (exit_found != 1 || map_copy->collected != 1)
 	{
 		ft_putstr_fd("Error\n", 1);
-		ft_putstr_fd("Ivalid path in the map\n", 2);
+		ft_putstr_fd("Invalid path in the map\n", 2);
 		free_data(data);
 		free_map(map_copy);
 		exit(1);
