@@ -6,7 +6,7 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/01/31 16:12:35 by ncontin          ###   ########.fr        #
+#    Updated: 2025/02/03 17:06:10 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ SRC =	so_long.c\
 		libs/gnl/get_next_line_utils.c\
 
 NAME = so_long
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -Llibs/mlx -lmlx -lX11 -lXext -lm
 RM = rm -f
 
@@ -62,5 +62,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re mlx
+.PHONY: all clean fclean re
 
