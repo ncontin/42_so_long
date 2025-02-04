@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/03 16:58:03 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/04 12:50:29 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 # include "libs/libft/libft.h"
 # include "libs/mlx/mlx.h"
 # include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
 
-# define MAP_FOLDER "maps/"
+# define MAP_FOLDER ""
 # define ESC 65307
 # define W 119
 # define A 97
