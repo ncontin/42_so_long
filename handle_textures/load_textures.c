@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:02:40 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/04 15:44:24 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:29:26 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	load_textures(t_data *data)
 	window_width = get_window_width(data->map);
 	window_height = get_window_height(data->map);
 	size = data->map->tile_size;
-	data->textures[BG] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/bgb.xpm",
+	data->textures[BG] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/bg.xpm",
 			&window_width, &window_height);
 	data->textures[WALL] = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/wall.xpm", &size, &size);
