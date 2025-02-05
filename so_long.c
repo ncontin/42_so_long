@@ -6,13 +6,13 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/31 16:22:26 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:46:12 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	handle_keypress(int key, t_data *data)
+static int	handle_keypress(int key, t_data *data)
 {
 	move_player_left(key, data);
 	move_player_up(key, data);
@@ -28,14 +28,14 @@ int	handle_keypress(int key, t_data *data)
 	return (0);
 }
 
-int	handle_close(t_data *data)
+static int	handle_close(t_data *data)
 {
 	cleanup(data);
 	exit(0);
 	return (0);
 }
 
-void	init_data(t_data *data)
+static void	init_data(t_data *data)
 {
 	t_map	*map;
 
@@ -52,18 +52,23 @@ void	init_data(t_data *data)
 	data->map->collected = 0;
 }
 
-int	main(int argc, char **argv)
+static void	check_args(int argc)
 {
-	t_data	*data;
-
 	if (argc < 2)
-		return (1);
+		exit(1);
 	if (argc > 2)
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("Too many arguments\n", 2);
-		return (1);
+		exit(1);
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_data	*data;
+
+	check_args(argc);
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (1);

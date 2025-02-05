@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   check_map_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 11:53:48 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 11:44:50 by ncontin          ###   ########.fr       */
+/*   Created: 2025/02/05 11:38:59 by ncontin           #+#    #+#             */
+/*   Updated: 2025/02/05 11:54:31 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	validate_map(t_data *data)
+void	check_map_size(t_data *data)
 {
-	check_map_size(data);
-	check_map_shape(data);
-	check_map_components(data);
-	check_map_walls(data);
-	check_map_path(data);
+	if ((data->map->width * data->map->tile_size) > 1920)
+	{
+		{
+			free_data(data);
+			ft_putstr_fd("Error\n", 2);
+			ft_putstr_fd("Map is too wide\n", 2);
+			exit(1);
+		}
+	}
+	if ((data->map->height * data->map->tile_size) > 1024)
+	{
+		free_data(data);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Map is too high\n", 2);
+		exit(1);
+	}
 }

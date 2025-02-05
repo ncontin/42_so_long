@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/04 12:50:29 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:47:19 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void		open_window(t_data *data);
 void		collect_keys(t_data *data);
 void		end_game(t_data *data);
 void		check_map_shape(t_data *data);
+void		check_map_size(t_data *data);
 
 #endif
