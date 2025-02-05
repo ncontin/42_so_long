@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:10:39 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:38:36 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 15:14:04 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,41 @@ typedef struct s_data
 	t_map	*map;
 }			t_data;
 
+// core
 void		cleanup(t_data *data);
 void		free_grid(t_map *map);
-void		read_map(char *arg, t_data *data, int fd);
-void		store_grid(char *arg, t_data *data);
+void		free_map(t_map *map);
+void		free_data(t_data *data);
+// init
+void		init_data(t_data *data);
+// window
+int			get_window_width(t_map *map);
+int			get_window_height(t_map *map);
+void		open_window(t_data *data);
+// collect
+void		collect_keys(t_data *data);
+// end
+void		end_game(t_data *data);
+// player
 void		move_player_left(int key, t_data *data);
 void		move_player_up(int key, t_data *data);
 void		move_player_right(int key, t_data *data);
 void		move_player_down(int key, t_data *data);
-void		load_textures(t_data *data);
-void		draw_map(t_data *data);
-int			get_window_height(t_map *map);
-int			get_window_width(t_map *map);
-void		validate_map(t_data *data);
-void		free_data(t_data *data);
-void		free_map(t_map *map);
+// checks
 void		check_map_components(t_data *data);
-void		find_components(t_map *map);
 void		check_map_path(t_data *data);
-void		check_map_walls(t_data *data);
-void		load_textures(t_data *data);
-void		open_window(t_data *data);
-void		collect_keys(t_data *data);
-void		end_game(t_data *data);
 void		check_map_shape(t_data *data);
 void		check_map_size(t_data *data);
-void		init_data(t_data *data);
+void		check_map_walls(t_data *data);
+// finder
+void		find_components(t_map *map);
+// parser
+void		read_map(char *arg, t_data *data, int fd);
+void		store_grid(char *arg, t_data *data);
+// render
+void		load_textures(t_data *data);
+void		draw_map(t_data *data);
+// validator
+void		validate_map(t_data *data);
 
 #endif

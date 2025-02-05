@@ -6,13 +6,13 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:38:09 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 15:11:13 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../so_long.h"
 
-void	check_result(t_data *data, int door, int collectible, int player)
+static void	check_result(t_data *data, int door, int collectible, int player)
 {
 	if (door != 1 || collectible < 1 || player != 1)
 	{
@@ -23,7 +23,7 @@ void	check_result(t_data *data, int door, int collectible, int player)
 	}
 }
 
-void	check_char(char c, int *door, int *collectible, int *player)
+static void	check_char(char c, int *door, int *collectible, int *player)
 {
 	if (c != 'E' && c != 'P' && c != '0' && c != 'C' && c != '1')
 	{

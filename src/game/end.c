@@ -6,12 +6,11 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:51:48 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:02:14 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 15:04:07 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
-
 
 void	end_game(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:59:59 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:34:03 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 15:04:28 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,3 @@ void	init_data(t_data *data)
 	data->map->collectibles = 0;
 	data->map->collected = 0;
 }
-
-
