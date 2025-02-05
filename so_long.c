@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:10:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 12:46:12 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:14:59 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,6 @@ static int	handle_close(t_data *data)
 	cleanup(data);
 	exit(0);
 	return (0);
-}
-
-static void	init_data(t_data *data)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-	{
-		free(data);
-		exit(1);
-	}
-	data->move_count = 0;
-	data->map = map;
-	map->tile_size = 32;
-	data->map->collectibles = 0;
-	data->map->collected = 0;
 }
 
 static void	check_args(int argc)

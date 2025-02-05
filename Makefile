@@ -6,28 +6,22 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/02/05 12:52:20 by ncontin          ###   ########.fr        #
+#    Updated: 2025/02/05 13:39:08 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	so_long.c\
-		open_window.c\
-		cleanup.c\
-		parse_map/check_path.c\
-		parse_map/check_components.c\
-		parse_map/check_size.c\
-		parse_map/check_shape.c\
-		parse_map/check_walls.c\
-		parse_map/read_map.c\
-		parse_map/store_grid.c\
-		parse_map/validate_map.c\
-		components/draw_map.c\
-		components/load_textures.c\
-		game_logic/collect_keys.c\
-		game_logic/end_game.c\
-		game_logic/player_move.c\
+		$(SRC_CORE)\
+		$(SRC_GAME)\
+		$(SRC_MAP)\
+		$(SRC_MAP_CHECKS)\
 		libs/gnl/get_next_line.c\
 		libs/gnl/get_next_line_utils.c\
+
+SRC_CORE = src/core/window.c src/core/init.c src/core/cleanup.c
+SRC_GAME = src/game/player.c src/game/collect.c src/game/end.c
+SRC_MAP = src/map/parser.c src/map/validator.c src/map/render.c src/map/finder.c
+SRC_MAP_CHECKS = src/map/checks/check_components.c src/map/checks/check_path.c src/map/checks/check_shape.c src/map/checks/check_size.c src/map/checks/check_walls.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
