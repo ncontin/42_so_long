@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:58:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:26:38 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 15:40:24 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	load_textures(t_data *data)
 	window_width = get_window_width(data->map);
 	window_height = get_window_height(data->map);
 	size = data->map->tile_size;
-	data->textures[BG] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/bg.xpm",
-			&window_width, &window_height);
+	data->textures[BG] = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/sprites/bg.xpm", &window_width, &window_height);
 	data->textures[WALL] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"assets/wall.xpm", &size, &size);
+			"assets/sprites/wall.xpm", &size, &size);
 	data->textures[EXIT] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"assets/exit.xpm", &size, &size);
+			"assets/sprites/exit.xpm", &size, &size);
 	data->textures[PLAYER] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"assets/player.xpm", &size, &size);
-	data->textures[KEY] = mlx_xpm_file_to_image(data->mlx_ptr, "assets/key.xpm",
-			&size, &size);
+			"assets/sprites/player.xpm", &size, &size);
+	data->textures[KEY] = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/sprites/key.xpm", &size, &size);
 	if (!data->textures[BG] || !data->textures[WALL] || !data->textures[EXIT]
 		|| !data->textures[PLAYER] || !data->textures[KEY])
 	{
-		cleanup(data);
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("One or more textures failed to load\n", 2);
+		cleanup(data);
 		exit(1);
 	}
 }

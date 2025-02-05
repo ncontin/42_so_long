@@ -6,7 +6,7 @@
 #    By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 13:12:10 by ncontin           #+#    #+#              #
-#    Updated: 2025/02/05 13:39:08 by ncontin          ###   ########.fr        #
+#    Updated: 2025/02/05 15:47:51 by ncontin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC_MAP_CHECKS = src/map/checks/check_components.c src/map/checks/check_path.c s
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 NAME = so_long
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 MLX_FLAGS = -Llibs/mlx -lmlx -lX11 -lXext -lm
 RM = rm -f
 INCLUDES = -I./libs/libft -I./libs/ft_printf -I./libs/gnl -I./libs/mlx

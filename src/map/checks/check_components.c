@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:18:46 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 15:11:13 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:54:23 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@ static void	check_result(t_data *data, int door, int collectible, int player)
 	}
 }
 
-static void	check_char(char c, int *door, int *collectible, int *player)
+static void	check_unkown_char(t_data *data, char c)
 {
 	if (c != 'E' && c != 'P' && c != '0' && c != 'C' && c != '1')
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("Unkown character found\n", 2);
+		free_data(data);
 		exit(1);
 	}
+}
+
+static void	get_total_items(char c, int *door, int *collectible, int *player)
+{
 	if (c == 'E')
 		(*door) += 1;
 	else if (c == 'C')
@@ -56,7 +61,9 @@ void	check_map_components(t_data *data)
 		x = 0;
 		while (x < data->map->width)
 		{
-			check_char(data->map->grid[y][x], &door, &collectible, &player);
+			check_unkown_char(data, data->map->grid[y][x]);
+			get_total_items(data->map->grid[y][x], &door, &collectible,
+				&player);
 			x++;
 		}
 		y++;

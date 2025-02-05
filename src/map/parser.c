@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:58:27 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 13:28:22 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:53:56 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,22 @@ static void	handle_malloc_path(t_data *data)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd("Memory allocation failed\n", 2);
-	free_data(data);
+	free(data->map);
+	free(data);
 	exit(1);
+}
+
+static void	handle_line(t_data *data, char *line, char *map_path)
+{
+	if (!line)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Error reading file\n", 2);
+		free(map_path);
+		free(data->map);
+		free(data);
+		exit(1);
+	}
 }
 
 void	read_map(char *arg, t_data *data, int fd)
@@ -36,17 +50,17 @@ void	read_map(char *arg, t_data *data, int fd)
 	char	*line;
 	int		len;
 
-	data->map->height = 0;
 	map_path = ft_strjoin(MAP_FOLDER, arg);
 	if (!map_path)
 		handle_malloc_path(data);
 	len = ft_strlen(map_path);
-	if (ft_strncmp(map_path + (len - 4), ".ber", 4) != 0)
+	if (len <= 4 || ft_strncmp(map_path + (len - 4), ".ber", 4) != 0)
 		handle_open_error(data, map_path);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		handle_open_error(data, map_path);
 	line = get_next_line(fd);
+	handle_line(data, line, map_path);
 	data->map->width = ft_strlen(line) - 1;
 	while (line)
 	{
