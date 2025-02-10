@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:16:57 by ncontin           #+#    #+#             */
-/*   Updated: 2025/01/22 15:56:45 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/10 17:46:56 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*gnl_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 char	*gnl_substr(char const *s, unsigned int start, size_t len);
 int		gnl_strlen(const char *str);
-char		*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

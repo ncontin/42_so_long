@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:58:27 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/05 16:53:56 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/10 17:59:02 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	handle_malloc_path(t_data *data)
 	exit(1);
 }
 
-static void	handle_line(t_data *data, char *line, char *map_path)
+static void	handle_line(t_data *data, char *line, char *map_path, int fd)
 {
 	if (!line)
 	{
@@ -40,10 +40,10 @@ static void	handle_line(t_data *data, char *line, char *map_path)
 		free(map_path);
 		free(data->map);
 		free(data);
+		close(fd);
 		exit(1);
 	}
 }
-
 void	read_map(char *arg, t_data *data, int fd)
 {
 	char	*map_path;
@@ -60,7 +60,7 @@ void	read_map(char *arg, t_data *data, int fd)
 	if (fd < 0)
 		handle_open_error(data, map_path);
 	line = get_next_line(fd);
-	handle_line(data, line, map_path);
+	handle_line(data, line, map_path, fd);
 	data->map->width = ft_strlen(line) - 1;
 	while (line)
 	{
