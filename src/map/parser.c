@@ -6,7 +6,7 @@
 /*   By: ncontin <ncontin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:58:27 by ncontin           #+#    #+#             */
-/*   Updated: 2025/02/10 17:59:02 by ncontin          ###   ########.fr       */
+/*   Updated: 2025/02/10 18:01:46 by ncontin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	handle_line(t_data *data, char *line, char *map_path, int fd)
 		exit(1);
 	}
 }
+
 void	read_map(char *arg, t_data *data, int fd)
 {
 	char	*map_path;
